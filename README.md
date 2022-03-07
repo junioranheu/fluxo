@@ -1,6 +1,6 @@
 # Fluxo
 
-Projeto feito para estudar e praticar o novo .NET 6 e criação de API com validação JWT, etc.<br />
+Projeto desenvolvido para estudar e praticar o novo .NET 6 e criação de API com validação JWT, etc.<br />
 
 Conteúdo:<br />
 1 - ProjetoGuia - Front-end: parte web feita com HTML, CSS e javascript (JQuery);<br />
