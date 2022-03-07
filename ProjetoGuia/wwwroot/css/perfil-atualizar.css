@@ -1,0 +1,117 @@
+﻿
+/* Imagem de perfil */
+.profile-pic {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .profile-pic:hover {
+        background-color: rgba(0,0,0,.5);
+        z-index: 10000;
+        color: #fff;
+        transition: all .3s ease;
+        text-decoration: none;
+    }
+
+    .profile-pic span {
+        display: inline-block;
+        padding-top: 4.5em;
+        padding-bottom: 4.5em;
+    }
+
+#div-imagem-perfil input[type="file"] {
+    display: none;
+    cursor: pointer;
+}
+
+/* Image + Checkbox - https://stackoverflow.com/questions/30663562/use-images-like-checkboxes */
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline-block;
+}
+
+input[type="checkbox"][id^="cb"] {
+    display: none;
+}
+
+li label {
+    border: 1px solid #fff;
+    padding: 10px;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /**/
+    max-height: 250px;
+    /*background-color: mediumpurple;*/
+}
+
+    li label::before {
+        background-color: white;
+        color: white;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        border: 1px solid var(--cor-principal-mais-escuro);
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 28px;
+        transition-duration: 0.4s;
+        transform: scale(0);
+    }
+
+    li label img {
+        height: 140px;
+        width: 100%;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        border-radius: 4px;
+        align-content: center;
+        /*background-color: pink;*/
+    }
+
+:checked + label {
+    border-color: var(--cor-principal-mais-escuro) !important;
+}
+
+    :checked + label::before {
+        content: "✓";
+        background-color: var(--cor-principal-mais-escuro) !important;
+        transform: scale(1);
+    }
+
+    :checked + label img {
+        transform: scale(0.9);
+        box-shadow: 0 0 5px var(--cor-principal-mais-escuro) !important;
+        z-index: -1;
+    }
+
+
+.um-terco {
+    /*background-color: pink;*/
+    width: 32% !important;
+}
+

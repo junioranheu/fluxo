@@ -1,0 +1,480 @@
+﻿@*@model IEnumerable<ProjetoGuia_API.Models.Usuario>*@
+
+@{
+    Layout = "";
+
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+    string sloganApp = ProjetoGuia_Biblioteca.Biblioteca.sloganApp;
+    string keywordsApp = ProjetoGuia_Biblioteca.Biblioteca.keywordsApp;
+
+    // Título aleatório;
+    var r = new Random();
+    var listaTitulos = new List<string> {
+       "descobrir um novo bar",
+       "encontrar uma nova hambúrgueria",
+       "ir à uma nova balada",
+       "encontrar uma sorveteria",
+       "saber o que tem de bom no centro",
+       "descobrir onde !importantomprar o beck maneiro"
+    };
+
+    int index = r.Next(listaTitulos.Count);
+    string titulo = listaTitulos[index];
+}
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@sloganApp">
+    <meta name="keywords" content="@keywordsApp">
+    <meta name="author" content="@@junioranheu">
+    <title>@nomeApp — @sloganApp</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous"
+          media="print" onload="this.media='all'" asp-append-version="true">
+
+    <!--====== Animate css ======-->
+    <link rel="stylesheet" href="/lib/landing-page/assets/css/animate.css" media="print" onload="this.media='all'" asp-append-version="true">
+
+    <!--====== Magnific Popup (Adiado/defer) ======-->
+    <link rel="stylesheet" href="/lib/landing-page/assets/css/magnific-popup.css" media="print" onload="this.media='all'" asp-append-version="true">
+
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" href="/lib/landing-page/assets/css/slick.css" asp-append-version="true">
+
+    <!--====== Line Icons (Preload) ======-->
+    <link rel="preload" as="style" href="/lib/landing-page/assets/css/LineIcons.css" onload="this.rel='stylesheet'" asp-append-version="true">
+
+    <!--====== Default css (Adiado/defer) ======-->
+    <link rel="stylesheet" href="/lib/landing-page/assets/css/default.css" media="print" onload="this.media='all'" asp-append-version="true">
+
+    <!--====== Fonte (Adiado/defer modo font) ======-->
+    <link rel="stylesheet" href="/fonts/poppins.css" media="print" onload="this.onload=null;this.removeAttribute('media');" asp-append-version="true">
+
+    <!--====== Consentimento de cookies ======-->
+    <link rel="stylesheet" href="/lib/ihavecookies.js/css/ihavecookies.css" asp-append-version="true">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="/lib/landing-page/assets/css/style.css" asp-append-version="true">
+
+    <!--====== Responsive css ======-->
+    <link rel="stylesheet" href="/lib/landing-page/assets/css/responsive.css" asp-append-version="true">
+</head>
+
+<body>
+    <!--====== LOADING INICIAL ======-->
+
+    <div class="preloader">
+        <div class="spin">
+            <div class="cube1"></div>
+            <div class="cube2"></div>
+        </div>
+    </div>
+
+    <!--====== FIM DO LOADING INICIAL ======-->
+    <!--====== NAVBAR ======-->
+
+    <header class="header-area sem-highlight">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="LandingPage">
+                            @*<img src="/static/outro/fluxo.webp" class="ajustar-logo">*@
+                            <h3>Fluxo</h3>
+                        </a> <!-- Logo -->
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="bar-icon"></span>
+                            <span class="bar-icon"></span>
+                            <span class="bar-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul id="nav" class="navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a data-scroll-nav="0" href="#home">Início</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a data-scroll-nav="0" href="#sobre">Sobre</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a asp-controller="Home" asp-action="CriarConta">Crie sua conta</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a asp-controller="Home" asp-action="Entrar">Entrar</a>
+                                </li>
+                            </ul> <!-- navbar nav -->
+                        </div>
+                    </nav> <!-- navbar -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </header>
+
+    <!--====== FIM DA NAVBAR ======-->
+    <!--====== PRIMEIRA PARTE ======-->
+
+    <section id="home" class="slider-area pt-180 pb-30">
+        <div class="container-fluid position-relative">
+            <div class="slider-active">
+                <!-- Primeiro slide -->
+                <div class="single-slider">
+                    <div class="slider-bg">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="slider-product-image d-none d-md-block">
+                                    <img src="/static/gifs/hamburguer.webp" class="borda">
+
+                                    @*      <div class="slider-discount-tag">
+                                        <p>Oi, né?</p>
+                                        </div>*@
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-7">
+                                <div class="slider-product-content">
+                                    <h1 class="slider-title mb-25" data-animation="fadeInUp" data-delay="0.3s">Bem-vindo ao <span>@nomeApp</span></h1>
+                                    <a class="main-btn mt-2" asp-controller="Home" asp-action="CriarConta" data-animation="fadeInUp" data-delay="1.5s">Crie sua conta <i class="lni-chevron-right"></i></a>
+                                    <a class="main-btn main-btn-2 mt-2" asp-controller="Home" asp-action="Entrar" data-animation="fadeInUp" data-delay="1.9s">Entre agora <i class="lni-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Segundo slide -->
+                <div class="single-slider">
+                    <div class="slider-bg">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="slider-product-image d-none d-md-block">
+                                    <img src="/static/gifs/pikachu.webp" class="borda">
+
+                                    <div class="slider-discount-tag">
+                                        <p>Oi, né?</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-7">
+                                <div class="slider-product-content">
+                                    <h1 class="slider-title mb-10" data-animation="fadeInUp" data-delay="0.3s">Talvez, <span>você</span>...</h1>
+                                    <p class="mb-25" data-animation="fadeInUp" data-delay="0.9s">queira @titulo... tá esperando o quê?</p>
+                                    <a class="main-btn" asp-controller="Home" asp-action="Inicio" data-animation="fadeInUp" data-delay="1.5s">@sloganApp <i class="lni-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terceiro slide -->
+                <div class="single-slider">
+                    <div class="slider-bg">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="slider-product-image d-none d-md-block">
+                                    <img src="/static/gifs/relaxando.webp" class="borda">
+                                    @*
+                                        <div class="slider-discount-tag">
+                                        <p>xxx</p>
+                                        </div>*@
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-7">
+                                <div class="slider-product-content">
+                                    <h1 class="slider-title mb-10" data-animation="fadeInUp" data-delay="0.3s"><span>Fluxo</span> & <span>relaxamento</span></h1>
+                                    <p class="mb-25" data-animation="fadeInUp" data-delay="0.9s">Clique aqui embaixo e entre agora mesmo!</p>
+                                    <a class="main-btn" asp-controller="Home" asp-action="Inicio" data-animation="fadeInUp" data-delay="1.5s">@sloganApp <i class="lni-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-social">
+                <div class="row justify-content-end">
+                    <div class="col-lg-7 col-md-6">
+                        <ul class="social text-right">
+                            <li><a href="#" target="_blank"><i class="lni-facebook-filled"></i></a></li>
+                            @*<li><a href="#" target="_blank"><i class="lni-twitter-original"></i></a></li>*@
+                            <li><a href="#" target="_blank"><i class="lni-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- container fluid -->
+    </section>
+
+    <!--====== FIM DA PRIMEIRA PARTE ======-->
+    <!--====== DUAS DIVS BONITAS + SOBRE ======-->
+
+    <section class="discount-product pt-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-discount-product mt-30">
+                        <div class="product-image">
+                            <img src="/static/gifs/top.webp" class="borda" loading="lazy" width="1" height="1">
+                        </div>
+
+                        <div class="product-content">
+                            <h4 class="content-title mb-15 fundo-texto">Imagine um texto bem legal aqui!</h4>
+
+                            <a class="fundo-texto" asp-controller="Home" asp-action="Inicio" style="color: #211F24 !important;">
+                                Ver mais <i class="lni-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="single-discount-product mt-30">
+                        <div class="product-image">
+                            <img src="/static/gifs/poze.webp" class="borda" loading="lazy" width="1" height="1">
+                        </div>
+
+                        <div class="product-content">
+                            <h4 class="content-title mb-15 fundo-texto">Testando essa bagaça...<br />1, 2, 3</h4>
+
+                            <a class="fundo-texto" asp-controller="Home" asp-action="Inicio" style="color: #211F24 !important;">
+                                Ver mais <i class="lni-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="services-area pt-100 pb-200">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title pb-30">
+                        <h5 class="mb-15 sem-highlight">!!!</h5>
+                        <h3 class="title mb-15">Está perdido?</h3>
+                        <p>
+                            Conheça sua cidade usando o @nomeApp<br />
+                            Descubra nov<span id="spanTypeWriter"><span class="Typewriter__wrapper">ex</span><span class="Typewriter__cursor">|</span></span>
+                        </p>
+                    </div> <!-- section title -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="services-left mt-45">
+                        <div class="services">
+                            <img src="/static/gifs/procurando.webp" class="borda">
+                            <a asp-controller="Home" asp-action="Inicio" class="main-btn mt-30">@sloganApp <i class="lni-chevron-right"></i></a>
+                        </div> <!-- services btn -->
+                    </div> <!-- services left -->
+                </div>
+
+                <div class="col-lg-6 sem-highlight">
+                    <div class="services-right mt-15">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 col-sm-8">
+                                <div class="single-services text-center mt-30 borda">
+                                    <div class="services-icon">
+                                        <i class="lni-customer"></i>
+                                    </div>
+
+                                    <div class="services-content mt-20">
+                                        <h5 class="title mb-10">Praticidade</h5>
+                                        <p>Plataforma simples e intuítiva.</p>
+                                    </div>
+                                </div> <!-- single services -->
+
+                                <div class="single-services text-center mt-30 borda">
+                                    <div class="services-icon">
+                                        <i class="lni-grid-alt"></i>
+                                    </div>
+
+                                    <div class="services-content mt-20">
+                                        <h5 class="title mb-10">Comunidade</h5>
+                                        <p>Gente para conversar.</p>
+                                    </div>
+                                </div> <!-- single services -->
+                            </div>
+
+                            <div class="col-md-6 col-sm-8">
+                                <div class="single-services text-center mt-30 borda">
+                                    <div class="services-icon">
+                                        <i class="lni-ruler-pencil"></i>
+                                    </div>
+
+                                    <div class="services-content mt-20">
+                                        <h5 class="title mb-10">De graça</h5>
+                                        <p>Paga nada. Quer mais o quê?</p>
+                                    </div>
+                                </div> <!-- single services -->
+
+                                <div class="single-services text-center mt-30 borda">
+                                    <div class="services-icon">
+                                        <i class="lni-support"></i>
+                                    </div>
+
+                                    <div class="services-content mt-20">
+                                        <h5 class="title mb-10">Dúvidas?</h5>
+                                        <p>Chama no zipzop.</p>
+                                    </div>
+                                </div> <!-- single services -->
+                            </div>
+                        </div> <!-- row -->
+                    </div> <!-- services right -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== FIM DAS DUAS DIVS BONITAS + SOBRE ======-->
+    <!--====== FOOTER ======-->
+
+    <section id="footer" class="footer-area sem-highlight">
+        <div class="container">
+            <div class="footer-widget pt-75 pb-120">
+                <div class="row">
+                    <div class="col-lg-3 col-md-5 col-sm-7">
+                        <div class="footer-logo mt-60">
+                            <a asp-controller="Home" asp-action="LandingPage" class="centralizar">
+                                <img src="/static/outro/fluxo.webp" class="ajustar-logo">
+                            </a>
+
+                            <p class="mt-10 centralizar">@nomeApp — @sloganApp</p>
+
+                            <ul class="footer-social mt-25 centralizar">
+                                <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni-twitter-original"></i></a></li>
+                                <li><a href="#"><i class="lni-instagram"></i></a></li>
+                            </ul>
+                        </div> 
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-5">
+                   @*     <div class="footer-link mt-50">
+                            <h5 class="f-title">xxx</h5>
+                            <ul>
+                                <li><a href="#">xxx</a></li>
+                                <li><a href="#">xxx</a></li>
+                                <li><a href="#">xxx</a></li>
+                                <li><a href="#">xxx</a></li>
+                                <li><a href="#">xxx</a></li>
+                            </ul>
+                        </div> *@
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-5">
+                        <div class="footer-link mt-50">
+                            <h5 class="f-title">Links úteis</h5>
+                            <ul>
+                                <li><a href="#">Forum</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Ajuda</a></li>
+                                <li><a href="#">Contate-nos</a></li>
+                                <li><a asp-controller="Home" asp-action="TermosUso">Política de privacidade</a></li>
+                            </ul>
+                        </div> 
+                    </div>
+
+                    <div class="col-lg-4 col-md-5 col-sm-7">
+                        <div class="footer-info mt-50">
+                            <h5 class="f-title">Outras informações</h5>
+                            <ul>
+                                <li>
+                                    <div class="single-footer-info mt-20">
+                                        <span>Telefone:</span>
+                                        <div class="footer-info-content">
+                                            <p>+55 (12) 98271-6339</p>
+                                            <p>+55 (11) 9xxxx-xxxx</p>
+                                        </div>
+                                    </div> <!-- single footer info -->
+                                </li>
+
+                                <li>
+                                    <div class="single-footer-info mt-20">
+                                        <span>E-mail:</span>
+                                        <div class="footer-info-content">
+                                            <p>xxx@gmail.com</p>
+                                            <p>suporte.xxx@gmail.com</p>
+                                        </div>
+                                    </div> <!-- single footer info -->
+                                </li>
+
+                                <li>
+                                    <div class="single-footer-info mt-20">
+                                        <span>Barraco:</span>
+                                        <div class="footer-info-content">
+                                            <p>203, Rua dos mansos, São Paulo</p>
+                                        </div>
+                                    </div> <!-- single footer info -->
+                                </li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- footer widget -->
+
+            <div class="footer-copyright pt-15 pb-15">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright text-center">
+                            <p>
+                                Feito com o 💛 por
+                                <a href="https://www.instagram.com/junioranheu/" target="_blank" rel="nofollow">@@junioranheu</a>
+                                e
+                                <a href="https://www.instagram.com/marcello.salerno0/" target="_blank" rel="nofollow">@@ateu</a>
+                            </p>
+                        </div> <!-- copyright -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!--  footer copyright -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== FIM DO FOOTER ======-->
+    <!--====== OPÇÃO DE VOLTAR AO INÍCIO ======-->
+
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+
+    <!--====== FIM DA OPÇÃO DE VOLTAR AO INÍCIO ======-->
+    <!--====== jquery js ======-->
+    <script src="/lib/landing-page/assets/js/vendor/modernizr-3.6.0.min.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous"></script>
+
+    <!--====== Slick js ======-->
+    <script src="/lib/landing-page/assets/js/slick.min.js" asp-append-version="true"></script>
+
+    <!--====== Magnific Popup js ======-->
+    <script src="/lib/landing-page/assets/js/jquery.magnific-popup.min.js" asp-append-version="true"></script>
+
+    <!--====== nav js ======-->
+    <script src="/lib/landing-page/assets/js/jquery.nav.js" asp-append-version="true"></script>
+
+    <!--====== Nice Number js ======-->
+    <script src="/lib/landing-page/assets/js/jquery.nice-number.min.js" asp-append-version="true"></script>
+
+    <!--====== Simulador de escrita ======-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.13.1/core.min.js"></script>
+
+    <!--====== Consentimentos de cookies ======-->
+    <script src="/lib/ihavecookies.js/scripts/ihavecookies.min.js" asp-append-version="true"></script>
+
+    <!--====== Main js ======-->
+    <script src="/lib/landing-page/assets/js/main.js" asp-append-version="true"></script>
+</body>
+</html>

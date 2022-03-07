@@ -1,0 +1,326 @@
+﻿@using ProjetoGuia_API.Models
+@model ProjetoGuia_API.Models.Usuario
+
+@{
+    ViewData["Title"] = "Atualizar perfil";
+
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+}
+
+@section css{
+<link href="~/css/perfil-atualizar.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<!-- Efeito -->
+<div class="hero-zika">
+    <svg class="secao-diagonal" preserveAspectRatio="none" viewBox="0 0 1438 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 620V0h1438v240L0 620z" />
+        <!-- #E3F9F2 -->
+    </svg>
+</div>
+
+<!---->
+<section class="hero is-medium sem-highlight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-12-mobile is-10-tablet is-8-desktop is-7-widescreen">
+                    <div class="box">
+                        <div class="has-text-centered">
+                            <h1 class="title">Seus dados no <span class="grifar">@nomeApp</span></h1>
+                            @*<p class="subtitle"></p>*@
+                        </div>
+
+                        <hr />
+
+                        @if (TempData["AvisoDadosFaltantes"] != null)
+                        {
+                            <div class="notification mt-4">
+                                <p>Ei, @Model.NomeUsuarioSistema, <span class="grifar">parado aí</span> ✋</p>
+                                <p>@Html.Raw(TempData["AvisoDadosFaltantes"].ToString())</p>
+                                <p>Juramos que manteremos sua privacidade 🤠</p>
+                            </div>
+                        }
+
+                        <!-- #0 - Tabs -->
+                        <div class="tabs is-boxed mt-4">
+                            <ul>
+                                <li id="liDadosApp">
+                                    <a class="cor-preto">
+                                        <span class="icon is-small"><i class="fas fa-mobile-alt" aria-hidden="true"></i></span>
+                                        <span>Dados do @nomeApp</span>
+                                    </a>
+                                </li>
+
+                                <li id="liDadosPessoais">
+                                    <a class="cor-preto">
+                                        <span class="icon is-small"><i class="fas fa-user-lock" aria-hidden="true"></i></span>
+                                        <span>Dados pessoais</span>
+                                    </a>
+                                </li>
+
+                                @*<li id="liSobre">
+                                    <a class="cor-preto">
+                                    <span class="icon is-small"><i class="fas fa-question" aria-hidden="true"></i></span>
+                                    <span>Sobre</span>
+                                    </a>
+                                    </li>*@
+                            </ul>
+                        </div>
+
+                        <!-- #1 - Dados app -->
+                        <div id="divDadosApp" class="esconder">
+                            <div class="field has-image-centered texto-sem-highlight" id="div-imagem-perfil">
+                                <label class="label">Foto de perfil</label>
+
+                                @{
+                                    string usuarioFotoPerfil = Model.Foto;
+
+                                    if (String.IsNullOrEmpty(usuarioFotoPerfil))
+                                    {
+                                        usuarioFotoPerfil = "/static/outro/sem-imagem.webp";
+                                    }
+                                    else
+                                    {
+                                        usuarioFotoPerfil = "/upload/usuario/" + usuarioFotoPerfil;
+                                        string numeroAleatorio = ProjetoGuia_Biblioteca.Biblioteca.NumeroAleatorio(4);
+                                        usuarioFotoPerfil += String.Concat("?t=", numeroAleatorio); // Adicionar um número aleatório para "desbugar" o cache;
+                                    }
+                                }
+
+                                <div class="profile-pic has-image-centered" id="div-imagem-upload" style="background-image: url(@usuarioFotoPerfil);">
+                                    <span class="fas fa-camera"></span>
+                                    <span>Alterar</span>
+                                </div>
+
+                                <input type="file" id="inputFileUpload" accept="image/*">
+                            </div>
+
+                            <div class="field">
+                                <label class="label">Nome completo</label>
+                                <div class="control has-icons-right">
+                                    <input type="text" id="txtNome" class="input" value="@Model.NomeCompleto" placeholder="Seu nome completo" />
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-signature"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">E-mail</label>
+                                <div class="control has-icons-right">
+                                    <input type="email" id="txtEmail" class="input" value="@Model.Email" placeholder="Seu melhor e-mail" />
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-at"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">Nome de usuário</label>
+                                <div class="control has-icons-right">
+                                    <input type="text" id="txtNomeUsuario" class="input" value="@Model.NomeUsuarioSistema" placeholder="Seu nome de usuário no @nomeApp" />
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label">Senha</label>
+                                <div class="control has-icons-right">
+                                    <input type="password" id="txtSenha" class="input" value="@Model.Senha" placeholder="Sua senha" autocomplete="new-password" />
+                                    <span class="icon is-small is-right">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- #2 - Dados pessoais -->
+                        <div id="divDadosPessoais" class="esconder">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">CPF</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtCPF" class="input" value="@Model.UsuariosInformacoes?.CPF" placeholder="Seu CPF" />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-id-card"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Telefone</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtTelefone" class="input" value="@Model.UsuariosInformacoes?.Telefone" placeholder="Seu número de telefone" />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Data de aniversário</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtDataAniversario" class="input" value="@Model.UsuariosInformacoes?.DataAniversario" placeholder="Sua data de aniversário" />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-birthday-cake"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="field">
+                                        @{
+                                            int genero = Convert.ToInt32(Model.UsuariosInformacoes?.Genero);
+                                            string isMasculino = (genero == 1) ? "checked" : "";
+                                            string isFeminino = (genero == 2) ? "checked" : "";
+                                        }
+
+                                        @*<i class="fas fa-venus-mars"></i> *@
+                                        <label class="label">Gênero</label>
+
+                                        <div class="control">
+                                            <label class="radio">
+                                                <input type="radio" value="1" name="rbGenero" @isMasculino>
+                                                <span>Masculino</span>
+                                            </label>
+
+                                            <label class="radio">
+                                                <input type="radio" value="2" name="rbGenero" @isFeminino>
+                                                <span>Feminino</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">CEP</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtCEP" class="input" value="@Model.UsuariosInformacoes?.CEP" placeholder="Seu CEP atual" />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-globe-americas"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Número da residência</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtNumeroResidencia" class="input" value="@Model.UsuariosInformacoes?.NumeroResidencia" placeholder="O número da sua residência" />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-home"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Rua</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtRua" class="input" value="@Model.UsuariosInformacoes?.Rua" placeholder="A rua em que você vive" disabled />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-road"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Bairro</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtBairro" class="input" value="@Model.UsuariosInformacoes?.Bairro" placeholder="O bairro em que você vive" disabled />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Estado</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtEstado" class="input" value="@Model.UsuariosInformacoes?.Cidades.Estados.Sigla" placeholder="O estado em que você vive" disabled />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-map-marked-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    @*                @{
+                                        var estadosBd = (List<Estado>)ViewData["EstadosBd"];
+
+                                        <div class="field">
+                                        <label class="label"><i class="fas fa-home"></i> Estado</label>
+                                        <div class="control">
+                                        <div class="select is-fullwidth">
+                                        <select id="selectEstado" disabled>
+                                        <option>Qual estado você vive?</option>
+                                        @{
+                                        foreach (var e in estadosBd)
+                                        {
+                                        <option value="@e.EstadoId">@e.Sigla</option>
+                                        }
+                                        }
+                                        </select>
+
+                                        </div>
+                                        </div>
+                                        </div>
+                                        }*@
+
+                                    <div class="field">
+                                        <label class="label">Cidade</label>
+                                        <div class="control has-icons-right">
+                                            <input type="text" id="txtCidade" class="input" value="@Model.UsuariosInformacoes?.Cidades.Nome" placeholder="A cidade em que você vive" disabled />
+                                            <span class="icon is-small is-right">
+                                                <i class="fas fa-city"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- #3 - Sobre -->
+                        @*<div id="divSobre" class="esconder">
+                            </div>*@
+
+                        <hr />
+
+                        <div class="has-text-centered mt-5">
+                            <input type="submit" class="button is-primary" value="Salvar alterações" id="btnSalvarAlteracao">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+<script src="~/js/atualizar-perfil.js" asp-append-version="true"></script>
+}

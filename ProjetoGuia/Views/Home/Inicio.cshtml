@@ -1,0 +1,208 @@
+﻿@using ProjetoGuia_API.Models
+@model ProjetoGuia_API.Models.Usuario
+
+@{
+    ViewData["Title"] = "Início";
+
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+    string mensagemDia = ProjetoGuia_Biblioteca.Biblioteca.MensagemDiaTardeNoite();
+    string saudacao = mensagemDia + "!<br/>Bem-vindo ao " + nomeApp;
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        saudacao = mensagemDia + ", <span class='grifar'>" + @Model.NomeUsuarioSistema + "</span>!";
+    }
+}
+
+@section css{
+<link href="~/css/itens.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/css/card.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<!-- Cards -->
+<section class="mt-6">
+    <div class="card-ui-wrapper content-section">
+        @{
+            Dictionary<int, string> dic = new Dictionary<int, string>();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                if (Model.UsuarioTipoId == 2) // Usuário normal;
+                {
+                    dic = new Dictionary<int, string>()
+        {
+        {1, "/static/cards/loja.webp"},
+        {2, "Torne-se um parceiro"},
+        {3, "Quer fazer parte do " + @nomeApp + " como uma loja, para ganhar mais visibilidade, bla bla bla..."},
+        {4, "/"},
+        {5, "Clique aqui"},
+        {6, "fas fa-store"}
+        };
+                    @await Html.PartialAsync("~/Views/Shared/_Card.cshtml", dic)
+                }
+
+                if (Model.UsuarioTipoId == 3) // Estabelecimento;
+                {
+                    var dadosEstabelecimentoUsuarioBd = (Estabelecimento)ViewData["DadosEstabelecimentoUsuarioBd"];
+                    string nomeEstabelecimento = dadosEstabelecimentoUsuarioBd.Nome;
+                    string caminhoPerfilLoja = "/estabelecimento/" + dadosEstabelecimentoUsuarioBd.EstabelecimentoId.ToString();
+
+                    dic = new Dictionary<int, string>()
+        {
+        {1, "/static/cards/loja.webp"},
+        {2, nomeEstabelecimento},
+        {3, "Oi, né?<br/>Veja o perfil de seu estabelecimento"},
+        {4, caminhoPerfilLoja},
+        {5, "Ver"},
+        {6, "fas fa-store"}
+        };
+                    @await Html.PartialAsync("~/Views/Shared/_Card.cshtml", dic)
+                }
+
+                dic = new Dictionary<int, string>()
+        {
+        {1, "/static/cards/sobre.webp"},
+        {2, "Sobre"},
+        {3, "Bla bla bla...<br/>Descubra mais sobre o " + nomeApp},
+        {4, "/sobre"},
+        {5, "Descobrir"},
+        {6, "fas fa-book"}
+        };
+                @await Html.PartialAsync("~/Views/Shared/_Card.cshtml", dic)
+            }
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                dic = new Dictionary<int, string>()
+        {
+        {1, "/static/cards/entrar.webp"},
+        {2, "Faça login"},
+        {3, "Bla bla bla<br />Teste 1, 2, 3..."},
+        {4, "/entrar"},
+        {5, "Entrar"},
+        {6, "fas fa-sign-in-alt"}
+        };
+                @await Html.PartialAsync("~/Views/Shared/_Card.cshtml", dic)
+
+                dic = new Dictionary<int, string>()
+        {
+        {1, "/static/cards/comida.webp"},
+        {2, "Fluxo"},
+        {3, "Veja nossa página institucional<br />Conheça mais sobre a gente!"},
+        {4, "/fluxo"},
+        {5, "Ver"},
+        {6, "fas fa-smile-wink"}
+        };
+                @await Html.PartialAsync("~/Views/Shared/_Card.cshtml", dic)
+            }
+        }
+    </div>
+</section>
+
+<!-- Conteúdo -->
+<section class="mt-6">
+    <!-- Olá -->
+    <section class="content-section mt-4">
+        <h1 class="titulo">@Html.Raw(saudacao)</h1>
+    </section>
+
+    <!-- Campo de busca -->
+    <div class="main-area-header mt-3">
+        <div class="search-wrapper">
+            <input class="search-input" type="text" placeholder="Filtre os tipos de estabelecimentos aqui também..." id="txtFiltro">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
+                <defs />
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Categorias -->
+    <section class="content-section mt-6" id="divCategorias">
+        <h1 class="titulo" style="margin-top: 8px!important; margin-bottom: 8px !important;">
+            Categorias
+        </h1>
+
+        <div class="access-links">
+            <div class="categoria pointer" title="Mostrar todos" data-is-selecionado="1" id="opcaoMostrarTodasCategorias">
+                <div class="access-icon" style="background-color: var(--cor-principal)">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+
+                <span class="access-text">Todas as categorias</span>
+            </div>
+
+            @{
+                var estabelecimentosCategoriasBd = (List<EstabelecimentoCategoria>)ViewData["EstabelecimentosCategoriasBd"];
+
+                if (estabelecimentosCategoriasBd.Count() > 0)
+                {
+                    foreach (var c in estabelecimentosCategoriasBd.Where(a => a.IsAtivo == 1))
+                    {
+                        <div class="categoria pointer" title="Filtrar por @c.Categoria.ToLowerInvariant()" data-is-selecionado="0" data-id="@c.EstabelecimentoCategoriaId">
+                            <div class="access-icon">
+                                <i class="@c.Icone"></i>
+                            </div>
+
+                            <span class="access-text">@c.Categoria</span>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </section>
+
+    <!-- Tipos de estabelecimentos -->
+    <section class="content-section mt-6">
+        <div class="titulo-wrapper">
+            <h1 class="titulo">
+                Tipos de estabelecimentos
+            </h1>
+
+            @*<a class="titulo-link cor-principal-hover">
+                Ver mais
+                </a>*@
+        </div>
+
+        <!-- Tipos de estabelecimentos -->
+        <div class="section-part mt-3">
+            <div class="content-part-line">
+                @{
+                    var estabelecimentosTiposBd = (List<EstabelecimentoTipo>)ViewData["EstabelecimentosTiposBd"];
+
+                    if (estabelecimentosTiposBd.Count() > 0)
+                    {
+                        foreach (var et in estabelecimentosTiposBd.Where(a => a.IsAtivo == 1))
+                        {
+                            string thumbnail = "/static/" + et.Thumbnail;
+                            string caminhoEstabelecimento = "/estabelecimento/tipo/" + et.EstabelecimentoTipoId;
+
+                            <a class="image-wrapper" href="@caminhoEstabelecimento" data-categoria-id="@et.EstabelecimentoCategorias.EstabelecimentoCategoriaId" data-tipo="@et.Tipo" data-desc="@et.Descricao">
+                                <div class="image-overlay">
+                                    <div class="image-info">
+                                        <div class="image-info-text">
+                                            <h5 class="image-name medium cor-principal">@et.Tipo</h5>
+                                            <p class="image-subtext tiny">@et.Descricao</p>
+                                        </div>
+                                        @* <button class="btn-play"></button>*@
+                                    </div>
+                                </div>
+
+                                <img src="@thumbnail" loading="lazy" width="1" height="1" onerror="this.src='/static/outro/imagem-indisponivel.webp';" />
+                                <span class="image-icone">
+                                    <i class="@et.EstabelecimentoCategorias.Icone" title="@et.EstabelecimentoCategorias.Categoria"></i>
+                                </span>
+                            </a>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </section>
+</section>
+
+@section scripts{
+<script src="~/js/filtro.js" asp-append-version="true"></script>
+}

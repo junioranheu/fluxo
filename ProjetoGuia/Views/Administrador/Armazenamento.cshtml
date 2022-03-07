@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Gerenciar armazenamento";
+}
+
+<style>
+    .quebrar-texto {
+        word-break: break-all;
+    }
+</style>
+
+<section class="hero is-primary is-small hero-zika">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column is-12">
+                <div class="container content has-text-centered-mobile">
+                    <h1 class="title mt-4">
+                        <span class="fundo-texto-hero">
+                            Gerenciar armazenamento do servidor
+                        </span>
+                    </h1>
+
+                    <a href="https://fluxo.scm.azurewebsites.net/DebugConsole" target="_blank" class="button is-primary is-medium">
+                        <span class="icon">
+                            <i class="fas fa-terminal" aria-hidden="true"></i>
+                        </span>
+
+                        <span>Gerenciar Azure</span>
+                    </a>
+
+                    <a href="https://admin.mysql.uhserver.com/" target="_blank" class="button is-primary is-medium">
+                        <span class="icon">
+                            <i class="fas fa-database" aria-hidden="true"></i>
+                        </span>
+
+                        <span>Gerenciar BD</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-6">
+    <div class="box sem-highlight">
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Pasta</th>
+                    <th>Arquivos</th>
+                    <th>Tamanho</th>
+                    <th class="is-hidden-mobile">Caminho completo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class="tdPasta">@ViewBag.GCaminho</td>
+                    <td>@ViewBag.GQuantidadeArquivos</td>
+                    <td>@ViewBag.GTamanhoArquivos</td>
+                    <td class="quebrar-texto is-hidden-mobile">@ViewBag.GCaminho</td>
+                </tr>
+
+                <tr>
+                    <td class="tdPasta">@ViewBag.UCaminho</td>
+                    <td>@ViewBag.UQuantidadeArquivos</td>
+                    <td>@ViewBag.UTamanhoArquivos</td>
+                    <td class="quebrar-texto is-hidden-mobile">@ViewBag.UCaminho</td>
+                </tr>
+
+                <tr>
+                    <td class="tdPasta">@ViewBag.PCaminho</td>
+                    <td>@ViewBag.PQuantidadeArquivos</td>
+                    <td>@ViewBag.PTamanhoArquivos</td>
+                    <td class="quebrar-texto is-hidden-mobile">@ViewBag.PCaminho</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $('.tdPasta').each(function (i, obj) {
+            var caminhoCompleto = $(obj).text();
+
+            var penultimo = caminhoCompleto.lastIndexOf('\\', caminhoCompleto.lastIndexOf('\\') - 1);
+            var caminhoAjustado = caminhoCompleto.substring(
+                penultimo,
+                caminhoCompleto.lastIndexOf('\\')
+            );
+
+            if (!caminhoAjustado) {
+                caminhoAjustado = '-';
+            }
+
+            $(obj).text(caminhoAjustado);
+        });
+    });
+</script>
+}

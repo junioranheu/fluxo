@@ -1,0 +1,362 @@
+﻿
+/* https://codepen.io/areal_alien/pen/PoWKzre */
+
+/* Variaveis */
+:root {
+    --background: 243, 242, 245;
+    --background-dark: 233, 230, 237;
+    --background-darker: 221, 218, 224;
+    --black: #000000;
+    --white: #ffffff;
+    /* Colors */
+    --gray: 184, 184, 184;
+    --blue: 0, 123, 255;
+    /* Sizes */
+    --paragraph: 1.11rem;
+    /* misc */
+    --shadow-smooth: 0 5px 17px -7px rgba(0, 0, 0, .1);
+    --transition-short: cubic-bezier(.175,.685,.32,1.175);
+    --transition-long: cubic-bezier(.175,.685,.32,1.275);
+}
+
+/* #Flexbox */
+.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexbox-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flexbox-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flexbox-start {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+/* Columns */
+.flexbox-col {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flexbox-col-left {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.flexbox-col-right {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.flexbox-col-start {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.flexbox-col-start-center {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+/* Spacings */
+.flexbox-space-bet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flexbox-space-bet-start {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+/* = - = - = -
+    Classes
+- = - = - = - */
+.view-width {
+    width: 60%;
+}
+
+/* = - = - = - = -
+    Profile Top
+- = - = - = - = - */
+.profile-info {
+    width: 100%;
+}
+
+.profile-info-inner {
+    margin: 2.5em 0;
+}
+
+/* Profile Picture */
+.profile-picture-large {
+    padding: .3em;
+    width: 10em;
+    height: 10em;
+    margin: 0 2.5em 0 0;
+}
+
+    .profile-picture-large .profile-picture-inner {
+        width: 100%;
+        height: 100%;
+        border: .3em solid rgb(var(--background));
+    }
+
+.profile-picture-small {
+    padding: .2em;
+    width: 4em;
+    height: 4em;
+    margin: 0 .75em 0 0;
+}
+
+    .profile-picture-small .profile-picture-inner {
+        width: 100%;
+        height: 100%;
+        border: .2em solid rgb(var(--background));
+    }
+
+.profile-picture-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-picture-inner {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.profile-picture {
+    min-width: 100%;
+    max-width: 110%;
+    min-height: 100%;
+    display: block;
+    position: absolute;
+    object-fit: cover !important;
+    z-index: 2;
+}
+
+.profile-picture-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: var(--cor-principal);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.profile-picture-note {
+    top: 2.25em;
+    left: 1.75em;
+    padding: .75em 1.25em;
+    position: fixed;
+    will-change: transform;
+    color: var(--white);
+    background-color: var(--black);
+    border-radius: .25rem;
+    pointer-events: none;
+    transition: opacity .15s ease-in-out;
+    opacity: 0;
+    z-index: 4;
+}
+/* Username */
+.profile-username .name {
+    margin: 0 .2em 0 0;
+}
+
+.profile-username {
+    /*color: rgb(var(--blue));*/
+    font-size: var(--heading-small);
+}
+
+.name-small {
+    margin: 0 .25em 0 0;
+    font-size: 0.8rem;
+}
+
+.profile-username-small {
+    color: rgb(var(--blue));
+    font-size: calc(var(--paragraph) + .25rem);
+}
+/* Profile Followers */
+.profile-followers p {
+    margin: 0 1.5em 0 0;
+    cursor: pointer;
+}
+
+    .profile-followers p span {
+        margin: 0 .25em 0 0;
+        font-weight: 700;
+    }
+/* Profile Bio */
+.profile-bio {
+    margin: 0.5em 0 0 0;
+    font-weight: 300;
+}
+
+.profile-bio-inner .line {
+    display: block;
+    word-break: break-word;
+}
+
+.profile-bio-link-inner {
+    color: var(--black);
+    text-decoration: none;
+}
+
+    .profile-bio-link-inner:visited {
+        color: var(--black);
+    }
+
+.profile-bio-link {
+    font-weight: 500;
+    color: rgba(var(--blue), 1);
+    text-decoration: none;
+}
+
+    .profile-bio-link:visited {
+        color: rgba(var(--blue), .5);
+        text-decoration: none;
+    }
+
+/* -
+-*-~*~-*-*-~*~-*-*-~*~-* |
+　　　　　@keyframes　　　　|
+-*-~*~-*-*-~*~-*-*-~*~-* |
+- */
+
+/* -
+-*-~*~-*-*-~*~-*-*-~*~-* |
+　　　　@media rules　　　　|
+-*-~*~-*-*-~*~-*-*-~*~-* |
+- */
+@media only screen and (max-width: 1660px) {
+    .view-width {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 1456px) {
+    .view-width {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1220px) {
+    .view-width {
+        width: 75%;
+    }
+    /* = - = - = - = -
+        Profile Top
+    - = - = - = - = - */
+    /* Profile Picture */
+    .profile-picture-large {
+        padding: .3em;
+        width: 8em;
+        height: 8em;
+        margin: 0 1.5em 0 0;
+    }
+
+        .profile-picture-large .profile-picture-inner {
+            width: 100%;
+            height: 100%;
+            border: .3em solid rgb(var(--background));
+        }
+}
+
+@media only screen and (max-width: 1024px) {
+    :root {
+        /* Sizes */
+        --heading-large: 5.2rem;
+        --heading-medium: 3.2rem;
+        --heading-small: 2rem;
+        --paragraph: 1rem;
+    }
+
+    .view-width {
+        width: 85%;
+    }
+    /* = - = - = - = -
+        Profile Top
+    - = - = - = - = - */
+    /* Profile Picture */
+    .profile-picture-large {
+        padding: .2em;
+        width: 6em;
+        height: 6em;
+        margin: 0 1.25em 0 0;
+    }
+
+        .profile-picture-large .profile-picture-inner {
+            width: 100%;
+            height: 100%;
+            border: .2em solid rgb(var(--background));
+        }
+
+    /* = - = - = - = - =
+        Profile Grid
+    - = - = - = - = - = */
+    .profile-grid-inner {
+        /*grid-gap: 1em;*/
+    }
+}
+
+@media only screen and (max-width: 756px) {
+    .view-width {
+        width: calc(100% - 5rem);
+    }
+    /* = - = - = - = -
+        Profile Top
+    - = - = - = - = - */
+    .profile-info-inner {
+        flex-direction: column;
+    }
+
+    .profile-left {
+        margin: 0 0 1em 0;
+        flex-direction: column;
+    }
+    /* Profile Picture */
+    .profile-picture-large {
+        margin: 0 0 1em 0;
+    }
+    /* = - = - = - = - =
+        Profile Grid
+    - = - = - = - = - = */
+    .profile-grid-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    /* = - = - = - = - =
+        Profile Grid
+    - = - = - = - = - = */
+    .profile-grid-inner {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media only screen and (max-width: 496px) {
+}

@@ -1,0 +1,5 @@
+* text=auto
+*.css linguist-detectable=false
+*.html linguist-detectable=false
+*.cshtml linguist-detectable=false
+/ProjetoGuia_API/Data/DBInitializer.cs linguist-vendored

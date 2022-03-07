@@ -1,0 +1,219 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+
+@{
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+    string sloganApp = ProjetoGuia_Biblioteca.Biblioteca.sloganApp;
+    string keywordsApp = ProjetoGuia_Biblioteca.Biblioteca.keywordsApp;
+
+    // Informações da pessoa logada;
+    string usuarioNomeCompleto = "-1";
+    int usuarioId = -1;
+    int usuarioRole = -1;
+    string usuarioNomeDeUsuario = "-1";
+    string usuarioFotoPerfil = "-1";
+
+    if (User.Identity.IsAuthenticated)
+    {
+        usuarioNomeCompleto = User.Identity.Name; // Nome completo;
+        usuarioId = Convert.ToInt32(User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value); // Id;
+        usuarioRole = Convert.ToInt32(User.FindFirst(claim => claim.Type == ClaimTypes.Role)?.Value); // Tipo de usuário;
+        usuarioNomeDeUsuario = User.FindFirst(claim => claim.Type == ClaimTypes.UserData)?.Value; // Nome de usuário;
+        usuarioFotoPerfil = User.FindFirst(claim => claim.Type == ClaimTypes.Thumbprint)?.Value; // Foto de perfil;
+    }
+
+    string inicio = "/fluxo";
+    @if (User.Identity.IsAuthenticated)
+    {
+        inicio = "/";
+    }
+}
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@nomeApp — @sloganApp">
+    <meta name="keywords" content="@keywordsApp">
+    <meta name="author" content="@@junioranheu">
+    <title>@nomeApp — @ViewData["Title"]</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- Bulma.css (Adiado/defer) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" rel="stylesheet" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Fontawesome (Adiado/defer)  -->
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <!-- Fontes (Adiado/defer de font) -->
+    <link media="print" rel="stylesheet" onload="this.onload=null;this.removeAttribute('media');" href="/fonts/poppins.css" asp-append-version="true">
+
+    <!-- Animate.css (Adiado/defer) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Barra de progresso -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" />
+
+    <!-- Loading -->
+    <link href="~/lib/loadingModal/css/loadingModal.css" rel="stylesheet" asp-append-version="true" />
+
+    <!-- Toast (td-message) -->
+    <link href="~/lib/toast/css/td-message.css" rel="stylesheet" asp-append-version="true" />
+
+    <!-- CSS do site -->
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
+
+    @await RenderSectionAsync("Css", required: false)
+</head>
+
+<body class="site">
+    <!-- Header -->
+    <nav class="navbar is-white has-centered-menu margem-desktop sem-highlight" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="@inicio">
+                @*<img src="/static/outro/fluxo.webp" title="@ProjetoGuia_Biblioteca.Biblioteca.nomeApp">*@
+                <span>@ProjetoGuia_Biblioteca.Biblioteca.nomeApp</span>
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item efeito-texto" asp-controller="Home" asp-action="Inicio">Início</a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Mais</a>
+
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" asp-controller="Home" asp-action="TermosUso">Política e termos de uso</a>
+                        <a class="navbar-item" asp-controller="Home" asp-action="ReportarProblema">Reportar um problema</a>
+                    </div>
+                </div>
+
+                <!-- 1 = adm -->
+                @if (usuarioRole == 1)
+                {
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Administrador
+                        </a>
+
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" asp-controller="Administrador" asp-action="Reports">
+                                Gerenciar reports
+                            </a>
+
+                            <a class="navbar-item" asp-controller="Administrador" asp-action="Armazenamento">
+                                Gerenciar armazenamento
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="navbar-end">
+                <a class="navbar-item" title="Reportar um problema" asp-controller="Home" asp-action="ReportarProblema">
+                    <i class="fas fa-bug"></i><span class="is-hidden-desktop ml-2">Reportar problema</span>
+                </a>
+
+                <a class="navbar-item" title="xxx" asp-controller="Home" asp-action="Inicio">
+                    <i class="fa fa-search"></i><span class="is-hidden-desktop ml-2">xxx</span>
+                </a>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @*<a class="navbar-item" title="xxx" asp-controller="Home" asp-action="Inicio">
+                        <i class="fas fa-bullseye"></i><span class="is-hidden-desktop ml-2">xxx</span>
+                        </a>*@
+
+                    <!-- Perfil -->
+                    if (usuarioFotoPerfil == "-1" || usuarioFotoPerfil == null || usuarioFotoPerfil == "")
+                    {
+                        usuarioFotoPerfil = "/static/outro/sem-imagem.webp";
+                    }
+                    else
+                    {
+                        usuarioFotoPerfil = "/upload/usuario/" + usuarioFotoPerfil;
+                        string numeroAleatorio = ProjetoGuia_Biblioteca.Biblioteca.NumeroAleatorio(4);
+                        usuarioFotoPerfil += String.Concat("?t=", numeroAleatorio); // Adicionar um número aleatório para "desbugar" o cache;
+                    }
+
+                    string caminhoPerfil = "/perfil/@" + @usuarioNomeDeUsuario;
+
+                    <div class="is-hidden-tablet-only is-hidden-mobile ml-1">
+                        <div class="ajustar-div-imagem-navbar navbar-item has-dropdown is-hoverable">
+                            <img src="@usuarioFotoPerfil" class="ajustar-imagem-navbar pointer"
+                             onclick="location.href='@caminhoPerfil';" onerror="this.src='/static/outro/sem-imagem.webp';" title="Meu perfil">
+                        </div>
+                    </div>
+
+                    <div class="is-hidden-desktop">
+                        <a class="navbar-item" href="@caminhoPerfil">
+                            <i class="fas fa-user-alt"></i><span class="ml-2">Meu perfil</span>
+                        </a>
+                    </div>
+
+                    <!-- Logica para mostrar o "Sair" em botão ou em texto normal, dependendo se é mobile ou desktop -->
+                    <a class="navbar-item is-hidden-desktop is-hidden-tablet" id="btnLogoutMobile">Sair</a>
+                    <div class="navbar-item is-hidden-mobile">
+                        <a class="button is-small is-white-bis is-rounded" id="btnLogout">Sair</a>
+                    </div>
+                }
+                else
+                {
+                    <a class="navbar-item" asp-controller="Home" asp-action="CriarConta">Criar conta</a>
+
+                    <!-- Logica para mostrar o "Entrar" em botão ou em texto normal, dependendo se é mobile ou desktop -->
+                    <a class="navbar-item is-hidden-desktop is-hidden-tablet" asp-controller="Home" asp-action="Entrar">Entrar</a>
+                    <div class="navbar-item is-hidden-mobile">
+                        <a class="button is-small is-primary is-rounded" asp-controller="Home" asp-action="Entrar">Entrar</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <!-- Corpo -->
+    <div class="container">
+        <main role="main" class="conteudo animate__animated animate__fadeIn">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Partial view do footer -->
+    @await Html.PartialAsync("~/Views/Shared/_Footer.cshtml")
+
+    <!-- Scripts -->
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Barra de progresso -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" integrity="sha512-bUg5gaqBVaXIJNuebamJ6uex//mjxPk8kljQTdM1SwkNrQD7pjS+PerntUSD+QRWPNJ0tq54/x4zRV8bLrLhZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Loading -->
+    <script src="~/lib/loadingModal/scripts/loadingModal.js" asp-append-version="true"></script>
+
+    <!-- Toast (td-message) -->
+    <script src="~/lib/toast/scripts/td-message.min.js" asp-append-version="true"></script>
+
+    <!-- Cookie: https://github.com/js-cookie/js-cookie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js" integrity="sha512-Meww2sXqNHxI1+5Dyh/9KAtvI9RZSA4c1K2k5iL02oiPO/RH3Q30L3M1albtqMg50u4gRTYdV4EXOQqXEI336A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+
+    <!-- Mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
+
+    <!-- Scripts do site -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

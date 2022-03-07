@@ -1,0 +1,320 @@
+﻿
+/* https://codepen.io/aybukeceylan/pen/yLOxRyG */
+
+/* À mão */
+.modal-padding {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.imagem-modal {
+    padding-top: 10px;
+}
+
+    .imagem-modal img {
+        border-radius: 10px;
+    }
+
+/* itens.css */
+:root {
+    --light-font: #79798c;
+}
+
+.main-area-header {
+    /*padding: 24px 40px;*/
+    /*background: linear-gradient(97deg, #f2f7fd 0%, #f0f4fd 90%);*/
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.search-wrapper {
+    border-radius: 4px;
+    background-color: #fff;
+    padding-right: 12px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--light-font);
+    box-shadow: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+    overflow: hidden;
+}
+
+.search-input {
+    border: none;
+    flex: 1;
+    outline: none;
+    height: 100%;
+    padding: 0 12px;
+    font-size: 12px;
+}
+
+    .search-input:focus {
+    }
+
+.content-section {
+    display: block;
+    overflow-x: hidden;
+    padding: 0 40px;
+}
+
+.titulo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-link {
+    display: block;
+    font-size: 12px;
+    line-height: 16px;
+    /*color: #8683d6;*/
+    color: var(--cor-preto);
+}
+
+.access-links {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 -8px;
+}
+
+.access-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombra);
+    background-color: var(--light-font);
+    /*background-color: var(--cor-cinza);*/
+    /*background-color: var(--cor-principal) !important;*/
+}
+
+.categoria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 150px;
+    padding: 8px;
+}
+
+.access-icon:hover + .access-text {
+    color: var(--cor-principal);
+    transition: 0.3s ease-in;
+}
+
+.access-text {
+    color: var(--light-font);
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.content-section-line,
+.content-part-line {
+    display: flex;
+    /*justify-content: space-between;*/
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.content-part-line {
+    height: 100%;
+    /* Espaço dos lados */
+    column-gap: 2.5rem;
+    /* Espaço de cima/baixo */
+    grid-gap: 1.2rem;
+}
+
+.content-section-line {
+    margin: 0 -8px;
+}
+
+.section-part {
+    flex-basis: 49%;
+}
+
+.image-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    height: auto;
+    position: relative;
+    flex-basis: 48%;
+    display: flex;
+    flex: 1 0 21%;
+    /*width: 100%;*/
+    max-width: 33.3%;
+    /*box-shadow: var(--sombra);*/
+}
+
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        transition: 0.2s ease-in;
+    }
+
+    .image-wrapper:hover img {
+        transform: scale(1.125);
+    }
+
+.image-overlay {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0, 16, 34, 0.8) 0%, rgba(240, 244, 253, 0.2) 90%);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.image-info-text {
+    width: calc(100% - 40px);
+}
+
+    .image-info-text p {
+        margin: 0;
+    }
+
+.image-name, .image-subtext {
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+}
+
+    .image-name.medium, .image-subtext.medium {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .image-name.tiny, .image-subtext.tiny {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+.image-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-subtext {
+    opacity: 0.8;
+}
+
+@-webkit-keyframes sticky {
+    0% {
+        transform: translatey(-88px);
+    }
+
+    100% {
+        transform: translatey(0px);
+    }
+}
+
+@keyframes sticky {
+    0% {
+        transform: translatey(-88px);
+    }
+
+    100% {
+        transform: translatey(0px);
+    }
+}
+
+.image-icone {
+    position: absolute;
+    z-index: 1;
+    border-radius: 10px;
+    padding: 4px 12px;
+    background-color: rgba(139, 156, 163, 0.5);
+    font-size: 10px;
+    right: 12px;
+    top: 12px;
+    color: #fff;
+}
+
+    .image-icone:hover {
+        color: var(--cor-principal);
+        transition: 0.3s ease-in;
+    }
+
+.btn-play {
+    border-radius: 50%;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2322244a' stroke='%2322244a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-play'%3E%3Cpolygon points='5 3 19 12 5 21 5 3'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+@media screen and (min-width: 850px) and (max-width: 1042px) {
+    .access-icon {
+        padding: 16px;
+    }
+
+        .access-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+}
+
+@media screen and (max-width: 900px) {
+    .access-icon svg {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content-section-line,
+    .content-part-line {
+        flex-direction: column;
+    }
+
+    .image-wrapper {
+        margin: 10px 0;
+        max-width: 100%;
+    }
+
+    .image-name.tiny, .image-subtext.tiny {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .categoria {
+        width: 20%;
+    }
+}
+
+/* Se for mobile, mude o CSS */
+@media only screen and (max-width: 768px) {
+    .content-part-line {
+        height: 400px;
+        overflow-x: visible;
+        overflow-y: hidden;
+    }
+
+        .content-part-line::-webkit-scrollbar { /* WebKit */
+            /*width: 0;*/
+            height: 3px;
+        }
+
+    .image-wrapper {
+        flex: 100%;
+        width: 80%;
+    }
+}

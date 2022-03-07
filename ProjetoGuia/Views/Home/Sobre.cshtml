@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Sobre";
+
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+}
+
+@section css{
+<link href="~/css/artigo.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<!-- Efeito -->
+<div class="hero-zika">
+    <svg class="secao-diagonal" preserveAspectRatio="none" viewBox="0 0 1438 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 620V0h1438v240L0 620z" />
+        <!-- #E3F9F2 -->
+    </svg>
+</div>
+
+@*<section class="hero is-primary is-small hero-zika">
+    <div class="hero-body">
+    <div class="columns">
+    <div class="column is-12">
+    <div class="container content has-text-centered-mobile">
+    <h1 class="title mt-4">
+    <span class="fundo-texto-hero">Sobre esse lindo site...</span>
+    </h1>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>*@
+
+<section class="section mt-6">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <div class="card article box">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-center">
+                                <img src="" class="author-image" onerror="this.src='/static/outro/sem-imagem.webp';">
+                            </div>
+
+                            <div class="media-content has-text-centered">
+                                <h2 class="mt-4 title is-3">Sobre</h2>
+
+                                <p class="subtitle is-6 article-subtitle mt-1">
+                                    <a href="/perfil/@@adm" class="cor-principal">@@adm</a> em 11 de novembro, 2021
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="content article-body mt-6">
+                            <!-- Termos de uso -->
+                            <div class="has-text-centered">
+                                <p class="title article-title">Sobre o @nomeApp</p>
+                            </div>
+
+                            <div class="mt-3">
+                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                                <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
+                                <p>Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.</p>
+                                <p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                                <p>Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                            </div>
+
+                            <!-- Política de cookier -->
+                            <div class="has-text-centered mt-6">
+                                <p class="title article-title">Sobre os criadores</p>
+                            </div>
+
+                            <div class="mt-3">
+                                <h3 class="is-size-5">Quem são?</h3>
+                                <p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                            </div>
+
+                            <div class="mt-5">
+                                <h3 class=" is-size-5">xxx</h3>
+                                <p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                            </div>
+
+                            <div class="mt-5">
+                                <h3 class="is-size-5">xxx</h3>
+                                <p>Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.</p>
+                            </div>
+
+                            <div class="mt-6">
+                                <hr />
+                            </div>
+
+                            <div class="has-text-centered">
+                                <a class="button is-primary" asp-controller="Home" asp-action="Inicio">Voltar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

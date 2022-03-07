@@ -1,0 +1,63 @@
+﻿@using ProjetoGuia_Biblioteca;
+
+@{
+    ViewData["Title"] = "404";
+
+    // Código aleatório;
+    string codigoAleatorio = Biblioteca.CodigoAleatorio(25);
+
+    // Data atual;
+    string dt = Biblioteca.HorarioBrasilia().ToString("yyyy-MM-dd HH:mm:ss.fffffffK");
+}
+
+<section class="hero is-medium mt-6">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-12-mobile is-10-tablet is-8-desktop is-8-widescreen">
+                    <h1 class="title titled is-1 has-text-centered sem-highlight">
+                        <span>Ops...</span>
+                    </h1>
+
+                    <div class="columns mt-2 is-vcentered">
+                        <div class="column">
+                            <p class="subtitle is-3 sem-highlight">Algo deu errado</p>
+
+                            @if (ViewBag.Erro != null)
+                            {
+                                <span class="has-text-weight-semibold is-size-5 cor-principal">@Html.Raw(ViewBag.Erro)</span>
+                            }
+                            else
+                            {
+                                <span class="has-text-weight-semibold is-size-5 cor-principal">Você provavelmente não tem acesso para a ação requisitada</span>
+                            }
+                        </div>
+
+                        <div class="column">
+                            <figure class="image is-256x256 has-image-centered sem-highlight">
+                                <img src="/static/svg/erro.svg">
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="buttons is-centered">
+                        <a class="button is-text" asp-controller="Home" asp-action="Inicio">Início</a>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="button is-text" asp-controller="Home" asp-action="Entrar">Entre</a>
+                            <a class="button is-text" asp-controller="Home" asp-action="CriarConta">Crie sua conta</a>
+                        }
+
+                        <a class="button is-text" asp-controller="Home" asp-action="ReportarProblema">Reportar problema</a>
+                    </div>
+
+                    <p class="mt-3 text-muted small sem-highlight">Ref: @codigoAleatorio @dt</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

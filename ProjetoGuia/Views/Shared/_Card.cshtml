@@ -1,0 +1,32 @@
+﻿@model Dictionary<int, string>
+
+    @{
+    string imagem = @Model.First(kvp => kvp.Key.Equals(1)).Value;
+    string titulo = @Model.First(kvp => kvp.Key.Equals(2)).Value;
+    string descricao = @Model.First(kvp => kvp.Key.Equals(3)).Value;
+    string url = @Model.First(kvp => kvp.Key.Equals(4)).Value;
+    string mensagemBotao = @Model.First(kvp => kvp.Key.Equals(5)).Value;
+    string icone = @Model.First(kvp => kvp.Key.Equals(6)).Value;
+}
+
+<div class="card-ui pequeno" style="background-image: url('@imagem');">
+    <div class="card-ui__overlay"></div>
+    <span class="card-ui__icon">
+        <i class="@icone"></i>
+    </span>
+
+    <div class="card-ui__content">
+        <div>
+            <h1 class="titulo cor-branco">@Html.Raw(titulo)</h1>
+        </div>
+
+        <div>
+            <p class="card-ui__desc">
+                @Html.Raw(descricao)
+            </p>
+        </div>
+
+        <a class="button is-primary is-fullwidth"
+           href="@url">@mensagemBotao</a>
+    </div>
+</div>

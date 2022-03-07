@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Entrar";
+
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+    string sloganApp = ProjetoGuia_Biblioteca.Biblioteca.sloganApp;
+}
+
+@section css{
+<link href="~/css/entrar.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<!-- Efeito -->
+<div class="hero-zika">
+    <svg class="secao-diagonal" preserveAspectRatio="none" viewBox="0 0 1438 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 620V0h1438v240L0 620z" />
+        <!-- #E3F9F2 -->
+    </svg>
+</div>
+
+<!-- Seção -->
+<section class="hero is-medium sem-highlight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-12-mobile is-10-tablet is-8-desktop is-6-widescreen">
+                    <div class="box">
+                        @{
+                            var r = new Random();
+                            var listaEfeitos = new List<string> {
+                        // "bounce", "flash", "headShake", "swing"
+                        ""
+                        };
+
+                            int index = r.Next(listaEfeitos.Count);
+                            string efeito = listaEfeitos[index];
+                        }
+
+                        <div class="has-text-centered animate__animated animate__@(efeito) mb-6">
+                            <div>
+                                <img class="login-logo" src="~/static/outro/fluxo.webp">
+                            </div>
+
+                            <h1 class="title">Entre no <span class="grifar">@nomeApp</span></h1>
+                            <h1 class="subtitle"><span class="efeito-texto">@sloganApp</span></h1>
+                        </div>
+
+                        <div class="field mt-5">
+                            <label class="label">Nome de usuário ou e-mail</label>
+                            <div class="control has-icons-right">
+                                <input class="input" type="text" id="txtUsuario">
+                                <span class="icon is-small is-right">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Senha</label>
+                            <div class="control has-icons-right">
+                                <input class="input" type="password" id="txtSenha">
+                                <span class="icon is-small is-right">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="has-text-centered mt-5">
+                            <input type="button" class="button is-vcentered is-primary is-fullwidth" id="btnEntrar" value="Entrar" />
+                        </div>
+
+                        <div class="has-text-centered mt-4">
+                            <small>
+                                <span>Ao entrar você automaticamente concorda com os <a asp-controller="Home" asp-action="TermosUso" class="cor-principal" target="_blank">termos de uso</a></span>
+                                <br />
+                                <a asp-controller="Home" asp-action="CriarConta" class="cor-principal">Não tem uma conta? Registre-se agora!</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+<script src="~/js/entrar.js" asp-append-version="true"></script>
+}

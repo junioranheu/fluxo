@@ -1,0 +1,457 @@
+﻿/* =-=-=-=-=-=-=-=-=-=-= Outros =-=-=-=-=-=-=-=-=-=-= */
+:root {
+    /* Cores */
+    --cor-principal: #FEBA35;
+    --cor-principal-mais-escuro: #B78C44;
+    --cor-branco: #F6F5F5;
+    --cor-cinza: #777;
+    --cor-preto: #211F24;
+    /* Sombra */
+    --sombra: 0px 8px 12px 0px rgba(0, 0, 0, 0.25);
+    /* Tamanhos */
+    --heading-large: 5.6rem;
+    --heading-medium: 3.6rem;
+    --heading-small: 2.4rem;
+    /* Fonts */
+    --font-main: "Poppins";
+}
+
+body {
+    margin: 0;
+    /*color: var(--text-primary);*/
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    /* Fundo, gerado por: https://cssgradient.io/ - Cor: #e2e1e1 */
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(226,225,225,1) 100%);
+}
+
+.titulo {
+    font-size: 1.5em;
+    line-height: 32px;
+}
+
+.box {
+    padding: 30px;
+    box-shadow: var(--sombra);
+    border-radius: 10px;
+}
+
+.secao-diagonal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 75vmin;
+    width: 100%;
+    z-index: -1;
+    fill: var(--cor-principal);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+    a:not(.button):not(.navbar-item):not(.navbar-link):not(.titulo-link):not(.navbar-burger) {
+        color: var(--cor-principal);
+    }
+
+    a:not(.button):not(.navbar-item):not(.navbar-link):not(.titulo-link):not(navbar-burger):hover {
+        color: var(--cor-principal-mais-escuro);
+    }
+
+.cor-principal {
+    color: var(--cor-principal-mais-escuro) !important;
+}
+
+.cor-preto {
+    color: var(--cor-preto) !important;
+}
+
+.cor-cinza {
+    color: var(--cor-cinza) !important;
+}
+
+.cor-branco {
+    color: var(--cor-branco) !important;
+}
+
+.cor-principal-hover:hover {
+    color: var(--cor-principal) !important;
+    transition: 0.3s ease-in;
+}
+
+.efeito-texto:hover {
+    /* Adicionar uma decoração em baixo do texto */
+    box-shadow: 0 3px 0 var(--cor-principal);
+    transition: 0.4s ease-in;
+}
+
+.esconder {
+    display: none !important;
+}
+
+.sem-highlight {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.has-image-centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tag {
+    height: auto !important;
+    white-space: unset !important;
+    padding: 10px;
+}
+
+ul.menu-list li a {
+    border-radius: 10px;
+}
+
+.is-256x256 {
+    width: 256px !important;
+    height: 256px !important;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.hero-zika {
+    /* Deixar os heros fullwidth, burlando até os paddings */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+section.hero-zika {
+    /* Background para os .hero-zika que estão em um section */
+    /*background-image: url(/static/wallpaper/zelda.webp);*/
+    background-position: 65% 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Sem high-light*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.fundo-texto-hero {
+    background-color: var(--cor-principal-mais-escuro);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+#nprogress .bar {
+    background: var(--cor-principal) !important;
+    height: 4px !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--cor-principal), 0 0 5px var(--cor-principal) !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: var(--cor-principal) !important;
+    border-left-color: var(--cor-principal) !important;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Barra de progresso =-=-=-=-=-=-=-=-=-=-= */
+#nprogress .bar, .peg {
+    background: var(--cor-principal) !important;
+    box-shadow: none !important;
+    height: 3px !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: var(--cor-principal) !important;
+    border-left-color: var(--cor-principal) !important;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Scroll e Selection =-=-=-=-=-=-=-=-=-=-= */
+/* Largura */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Fundo */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Scroll em si */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* On hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--cor-principal-mais-escuro);
+    }
+
+::selection {
+    background: var(--cor-principal);
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Navbar =-=-=-=-=-=-=-=-=-=-= */
+.navbar {
+    /*border-bottom: solid 0.1px #E0E0E0;*/
+}
+
+.navbar-menu {
+    /*background-color: pink !important;*/
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
+}
+
+/*.navbar.has-centered-menu .navbar-start {
+    flex-grow: 1 !important;
+    justify-content: center !important;
+}*/
+
+@media only screen and (min-width : 640px) {
+    /* Colocar margem caso NÃO seja mobile */
+    .margem-desktop {
+        /*background-color: pink !important;*/
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+@media only screen and (min-width : 1500px) {
+    /* Colocar margem caso NÃO seja mobile */
+    .margem-desktop {
+        /*background-color: blue !important;*/
+        padding-left: 18rem;
+        padding-right: 18rem;
+    }
+}
+
+.navbar-item, .navbar-link, a.navbar-link::after {
+    /*color: var(--cor-cinza) !important;*/
+    color: #777 !important;
+    font-weight: 600;
+    border-color: #C0C0C0 !important;
+    border-radius: 7px;
+}
+
+    .navbar-item:hover {
+        /* Mudar a cor do texto dos itens da navbar on hover */
+        color: var(--cor-principal-mais-escuro) !important;
+        transition: 0.3s ease-in;
+    }
+
+.ajustar-imagem-navbar {
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 50%;
+}
+
+.ajustar-div-imagem-navbar {
+    margin-top: 9px;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Ajustar relação do body com o footer =-=-=-=-=-=-=-=-=-=-= */
+.site {
+    /* Fixar o footer sempre embaixo */
+    flex: 1;
+}
+
+.conteudo {
+    /* Fixar o footer sempre embaixo (2) */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= is-primary e input is-primary =-=-=-=-=-=-=-=-=-=-= */
+.input:active, .input:focus {
+    border-color: var(--cor-principal) !important;
+}
+
+.is-primary {
+    color: #fff;
+    background-color: var(--cor-principal) !important;
+    border-color: var(--cor-principal) !important;
+}
+
+input.is-primary:hover, a.is-primary:hover {
+    color: #fff;
+    background-color: var(--cor-principal-mais-escuro) !important;
+    border-color: var(--cor-principal-mais-escuro) !important;
+}
+
+input.is-primary:focus, .is-primary.focus, input.input:focus {
+    box-shadow: 0 0 0 .01rem var(--cor-principal-mais-escuro) !important;
+}
+
+input.is-primary.disabled, .is-primary:disabled {
+    color: #fff !important;
+    background-color: var(--cor-principal) !important;
+    border-color: var(--cor-principal) !important;
+    cursor: not-allowed !important;
+}
+
+input.is-primary:not(:disabled):not(.disabled):active, .is-primary:not(:disabled):not(.disabled).active, .show > .is-primary.dropdown-toggle {
+    color: #fff !important;
+    background-color: var(--cor-principal-mais-escuro) !important;
+    /*border-color: #000 !important;*/
+}
+
+    input.is-primary:not(:disabled):not(.disabled):active:focus, .is-primary:not(:disabled):not(.disabled).active:focus, .show > .is-primary.dropdown-toggle:focus {
+        box-shadow: 0 0 0 .2rem var(--cor-principal-mais-escuro) !important;
+    }
+
+/* =-=-=-=-=-=-=-=-=-=-= a.button (botão do login do navbar, por exemplo) =-=-=-=-=-=-=-=-=-=-= */
+a.button:focus, a.button:active, .button:focus, .button:active {
+    border-color: var(--cor-principal) !important;
+    box-shadow: 0 0 0 0 var(--cor-principal-mais-escuro) !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
+}
+
+/*.button:focus*/
+/* =-=-=-=-=-=-=-=-=-=-= Radio button =-=-=-=-=-=-=-=-=-=-= */
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: var(--cor-principal);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid var(--cor-branco);
+}
+
+.select.is-primary:not(:hover)::after {
+    border-color: #00d1b2
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Select =-=-=-=-=-=-=-=-=-=-= */
+.select.is-primary select {
+    border-color: var(--cor-principal);
+}
+
+    .select.is-primary select.is-hovered, .select.is-primary select:hover {
+        border-color: var(--cor-principal-mais-escuro);
+    }
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: var(--cor-principal);
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Input =-=-=-=-=-=-=-=-=-=-= */
+input:focus, input:active, .is-focused.tags-input, .tags-input:active, .tags-input:focus {
+    border-color: var(--cor-principal) !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px inherit !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px inherit !important;
+}
+
+input[type="checkbox"]:checked {
+    filter: grayscale(1);
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Textarea =-=-=-=-=-=-=-=-=-=-= */
+textarea:focus {
+    box-shadow: none !important;
+    border: 1px solid var(--cor-principal) !important;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Adicionar border radius ao alert.min.js =-=-=-=-=-=-=-=-=-=-= */
+.alert_msg {
+    border-radius: 10px;
+}
+
+.alert_buttons {
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+/**/
+.grifar {
+    background-image: linear-gradient(120deg, #F6F5F5 10%, var(--cor-principal) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+}
+
+    .grifar:hover {
+        background-size: 100% 88%;
+    }
+
+
+/* Tipografia */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+h1 {
+    font-size: var(--heading-large);
+}
+
+h2 {
+    font-size: var(--heading-medium);
+}
+
+h3 {
+    font-size: var(--heading-small);
+}
+
+h4 {
+    font-size: calc(var(--heading-small) - .2rem);
+}
+
+h5 {
+    font-size: calc(var(--heading-small) - .4rem);
+}
+
+h6 {
+    font-size: calc(var(--heading-small) - .6rem);
+}
+
+h1, h2 {
+    font-weight: 900;
+}
+
+h3, h4, h5, h6 {
+    font-weight: 800;
+}

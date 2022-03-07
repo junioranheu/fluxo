@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Criar conta";
+
+    string nomeApp = ProjetoGuia_Biblioteca.Biblioteca.nomeApp;
+    string sloganApp = ProjetoGuia_Biblioteca.Biblioteca.sloganApp;
+}
+
+@section css{
+<link href="~/css/entrar.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<!-- Efeito -->
+<div class="hero-zika">
+    <svg class="secao-diagonal" preserveAspectRatio="none" viewBox="0 0 1438 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 620V0h1438v240L0 620z" />
+        <!-- #E3F9F2 -->
+    </svg>
+</div>
+
+<!-- Seção -->
+<section class="hero is-small mt-6 sem-highlight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-12-mobile is-10-tablet is-8-desktop is-6-widescreen">
+                    <div class="box">
+                        @{
+                            var r = new Random();
+                            var listaEfeitos = new List<string> {
+                        // "bounce", "flash", "headShake", "swing"
+                        ""
+                        };
+
+                            int index = r.Next(listaEfeitos.Count);
+                            string efeito = listaEfeitos[index];
+                        }
+
+                        <div class="has-text-centered animate__animated animate__@(efeito) mb-6">
+                            <div>
+                                <img class="login-logo" src="~/static/outro/fluxo.webp">
+                            </div>
+
+                            <h1 class="title">Crie sua conta no <span class="grifar">@nomeApp</span></h1>
+                            <h1 class="subtitle"><span class="efeito-texto">@sloganApp</span></h1>
+                        </div>
+
+                        <div class="field mt-5">
+                            <label class="label">Nome completo</label>
+                            <div class="control has-icons-right">
+                                <input class="input" type="text" id="txtNomeCompleto">
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-signature"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">E-mail</label>
+                            <div class="control has-icons-right">
+                                <input class="input" type="email" id="txtEmail">
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Nome de usuário</label>
+                            <div class="control has-icons-right has-icons-left">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-at"></i>
+                                </span>
+                                <input class="input" type="text" id="txtUsuario">
+                                <span class="icon is-small is-right">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Senha</label>
+                            <div class="control has-icons-right">
+                                <input class="input" type="password" id="txtSenha">
+                                <span class="icon is-small is-right">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="has-text-centered mt-5">
+                            <a class="button is-vcentered is-primary is-fullwidth" id="btnCriarConta">Criar conta</a>
+                        </div>
+
+                        <div class="has-text-centered mt-4">
+                            <small>
+                                <span>Ao criar sua conta você automaticamente concorda com os <a asp-controller="Home" asp-action="TermosUso" class="cor-principal" target="_blank">termos de uso</a></span>
+                                <br />
+                                <a asp-controller="Home" asp-action="Entrar" class="cor-principal">Já tem uma conta? Entre agora!</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+<script src="~/js/criar-conta.js" asp-append-version="true"></script>
+}

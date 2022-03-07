@@ -1,0 +1,234 @@
+﻿
+:root {
+    --bad-color: #ff5722;
+    --ok-color: #3f51b5;
+    --good-color: #36d896;
+    --great-color: var(--cor-principal);
+    --track-color: #eaeef4;
+}
+
+.card-avaliacao {
+    /*height: 160px;*/
+    /*width: 530px;*/
+    /*background: pink;*/
+    display: flex;
+    /*margin: auto;*/
+    position: relative;
+    border-radius: 10px;
+    /*box-shadow: 0px 2px 10px -10px #2f2f2f;*/
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+    .card-avaliacao .row {
+        margin-top: 30px;
+        display: flex;
+    }
+
+    .card-avaliacao p {
+        font-size: 18px;
+        font-weight: 700;
+        /*color: var(--great-color);*/
+    }
+
+.icon {
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+    .icon svg {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+.range {
+    position: relative;
+    width: 360px;
+    height: 17px;
+    left: 40px;
+    top: 10px;
+}
+
+    .range svg {
+        width: 100%;
+        height: 100%;
+    }
+
+        .range svg path {
+            transition: linear 0.5s;
+        }
+
+input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-50%);
+    background: none;
+    transition: linear 0.5s;
+}
+
+    input[type="range"]:focus {
+        outline: 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        width: 26px;
+        -webkit-appearance: none;
+        height: 26px;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        box-shadow: 0px 0px 6px 0px #ccc;
+        z-index: 2;
+        position: relative;
+        margin-left: 3px;
+        margin-top: -3px;
+    }
+
+.range.bad svg path#path-ok,
+.range.bad svg path#path-good,
+.range.bad svg path#path-great {
+    fill: var(--track-color);
+}
+
+.icon svg#icon-bad path {
+    fill: var(--bad-color);
+}
+
+.icon svg#icon-ok path {
+    fill: var(--ok-color);
+}
+
+.icon svg#icon-good path {
+    fill: var(--good-color);
+}
+
+.icon svg#icon-great path {
+    fill: var(--great-color);
+}
+
+.row.bad input[type="range"]::-webkit-slider-thumb {
+    background: var(--bad-color);
+}
+
+.row.ok input[type="range"]::-webkit-slider-thumb {
+    background: var(--ok-color);
+}
+
+.row.good input[type="range"]::-webkit-slider-thumb {
+    background: var(--good-color);
+}
+
+.row.great input[type="range"]::-webkit-slider-thumb {
+    background: var(--great-color);
+}
+
+.row .icon svg {
+    display: none;
+}
+
+.row.bad .icon svg#icon-bad,
+.row.ok .icon svg#icon-ok,
+.row.good .icon svg#icon-good,
+.row.great .icon svg#icon-great {
+    display: block;
+    animation: heartBeat 1s;
+}
+
+@-webkit-keyframes heartBeat {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    14% {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    28% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    42% {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    70% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes heartBeat {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    14% {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    28% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    42% {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    70% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.animate__heartBeat {
+    -webkit-animation-duration: 1.3s;
+    animation-duration: 1.3s;
+    -webkit-animation-duration: calc(var(--animate-duration) * 1.3);
+    animation-duration: calc(var(--animate-duration) * 1.3);
+    -webkit-animation-name: heartBeat;
+    animation-name: heartBeat;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+}
+
+/*.range:after {
+    content: "";
+    position: absolute;
+    box-shadow: 99px 31px 0px 1px var(--track-color), 183px 31px 0px 1px var(--track-color), 267px 31px 0px 1px var(--track-color), 351px 31px 0px 1px var(--track-color);
+    left: 0;
+    height: 6px;
+}*/
+
+.row.bad .range:after {
+    box-shadow: 99px 31px 0px 1px var(--bad-color), 183px 31px 0px 1px var(--track-color), 267px 31px 0px 1px var(--track-color), 351px 31px 0px 1px var(--track-color);
+}
+
+.row.ok .range:after {
+    box-shadow: 99px 31px 0px 1px var(--track-color), 183px 31px 0px 1px var(--ok-color), 267px 31px 0px 1px var(--track-color), 351px 31px 0px 1px var(--track-color);
+}
+
+.row.good .range:after {
+    box-shadow: 99px 31px 0px 1px var(--track-color), 183px 31px 0px 1px var(--track-color), 267px 31px 0px 1px var(--good-color), 351px 31px 0px 1px var(--track-color);
+}
+
+.row.great .range:after {
+    box-shadow: 99px 31px 0px 1px var(--track-color), 183px 31px 0px 1px var(--track-color), 267px 31px 0px 1px var(--track-color), 351px 31px 0px 1px var(--great-color);
+}

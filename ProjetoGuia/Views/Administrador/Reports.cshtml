@@ -1,0 +1,77 @@
+﻿@using ProjetoGuia_API.Models
+@model ProjetoGuia_API.Models.Report
+
+@{
+    ViewData["Title"] = "Gerenciar reports";
+}
+
+<style>
+    .quebrar-texto {
+        word-break: break-all;
+    }
+</style>
+
+<section class="hero is-primary is-small hero-zika">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column is-12">
+                <div class="container content has-text-centered-mobile">
+                    <h1 class="title mt-4">
+                        <span class="fundo-texto-hero">
+                            Gerenciar reports
+                        </span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Report de problema -->
+<section class="mt-6">
+    <div class="box sem-highlight">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuário</th>
+                    <th>Report</th>
+                    <th class="is-hidden-mobile">Data</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    var reportsBd = (List<Report>)ViewData["ReportsProblemasBd"];
+
+                    foreach (var r in reportsBd)
+                    {
+                        <tr onmouseover="javascript:this.style.backgroundColor='#e2e2e2'" onmouseout="javascript:this.style.backgroundColor=''">
+                            <td>@r.ReportId</td>
+
+                            @{
+                                if (r.Usuario != null)
+                                {
+                                    <td>
+                                        <a class="cor-principal" asp-controller="Usuarios" asp-action="Perfil" asp-route-nomeDeUsuario="@r.Usuario.NomeUsuarioSistema" target="_blank">
+                                            @@@r.Usuario.NomeUsuarioSistema
+                                        </a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>-</td>
+                                }
+                            }
+
+                            <td class="quebrar-texto">@r.Reclamacao</td>
+                            <td class="is-hidden-mobile">@r.Data</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
