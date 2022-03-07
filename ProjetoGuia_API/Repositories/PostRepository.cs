@@ -39,7 +39,7 @@ namespace ProjetoGuia_API.Repositories
             _context.Add(post);
             var isOk = await _context.SaveChangesAsync();
 
-            return isOk;
+            return post.PostId;
         }
 
         public async Task<int> PostAtualizar(Post post)
@@ -86,6 +86,16 @@ namespace ProjetoGuia_API.Repositories
                 Where(u => u.UsuarioId == usuarioId && u.PostTipoId == tipoPostId).AsNoTracking().ToListAsync();
 
             return postsBd;
+        }
+        public async Task<int> PostAtualizarImagemPost(string postId, string fotoPost)
+        {
+            var post = await _context.Posts.Where(p => p.PostId == Convert.ToInt32(postId)).FirstOrDefaultAsync();
+            post.Midia = fotoPost;
+
+            _context.Update(post);
+            var isOk = await _context.SaveChangesAsync();
+
+            return isOk;
         }
     }
 }

@@ -125,5 +125,45 @@ namespace ProjetoGuia_API.Controllers
 
             return postsBd;
         }
+
+        [HttpPost("criarComImagem")]
+        [Authorize]
+        public async Task<ActionResult<bool>> PostCriarComImagem([FromForm] string titulo, [FromForm] string conteudo, [FromForm] string formPasta, [FromForm] string formUsuarioId, IFormFile? formFile)
+        {
+            // Criar post;
+            Post post = new()
+            {
+                Titulo = titulo,
+                Conteudo = conteudo,
+                Midia = "", // Será atualizado depois que a imagem for upada no final do método;
+                UsuarioId = Convert.ToInt32(formUsuarioId),
+                PostTipoId = 2, // Post de estabelecimento;
+                IsAtivo = 1,
+                DataPost = ProjetoGuia_Biblioteca.Biblioteca.HorarioBrasilia()
+            };
+
+            var postId = await _posts.PostCriar(post);
+
+            if (postId < 1)
+            {
+                return NotFound();
+            }
+
+            // Upar imagem;
+            var isOk = true;
+            if (formFile != null)
+            {
+                isOk = await UparArquivoReact(formPasta, postId.ToString(), formFile);
+
+                // Atualizar o campo Midia do post;
+                if (isOk)
+                {
+                    string midia = $"{formPasta}/{formPasta}-{postId}{System.IO.Path.GetExtension(formFile.FileName)}";
+                    await _posts.PostAtualizarImagemPost(postId.ToString(), midia);
+                }
+            }
+
+            return isOk;
+        }
     }
 }

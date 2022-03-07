@@ -10,5 +10,6 @@ namespace ProjetoGuia_API.Interfaces
         Task<int> PostAtualizar(Post post);
         Task<int> PostDeletar(int id);
         Task<List<Post>> GetTodosPorUsuarioId(int usuarioId, int tipoPostId);
+        Task<int> PostAtualizarImagemPost(string postId, string fotoPost);
     }
 }

@@ -307,6 +307,38 @@ namespace ProjetoGuia_API.Controllers
 
             return resposta.IsSuccessStatusCode;
         }
+
+        protected static async Task<bool> UparArquivoReact(string formPasta, string formId, IFormFile formFile)
+        {
+            if (formFile.Length > 0)
+            {
+                string webRootPath = Directory.GetCurrentDirectory() + "/Upload/" + formPasta + "/";
+                string nomeNovo = formPasta + "-" + formId + System.IO.Path.GetExtension(formFile.FileName); // Nome novo do arquivo completo;
+                string nomeSemExtensao = formPasta + "-" + formId; // Nome novo do arquivo sem extensão;
+                string caminhoDestino = webRootPath + nomeNovo; // Caminho de destino para upar;
+
+                // Verificar se já existe uma foto caso exista, delete-a;
+                DirectoryInfo root = new(webRootPath);
+                FileInfo[] listfiles = root.GetFiles(nomeSemExtensao + ".*");
+                if (listfiles.Length > 0)
+                {
+                    foreach (FileInfo file in listfiles)
+                    {
+                        System.IO.File.Delete(file.ToString());
+                    }
+                }
+
+                // Salvar imagem na pasta Upload na API;
+                using (var fs = new FileStream(caminhoDestino, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(fs);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
 

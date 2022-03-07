@@ -211,36 +211,10 @@ namespace ProjetoGuia_API.Controllers
         // https://thewebdev.info/2021/11/07/how-to-read-and-upload-a-file-in-react-using-custom-button/
         [HttpPost("uparArquivoReact")]
         [Authorize]
-        public async Task<bool> UparArquivoReact([FromForm] string formPasta, [FromForm] string formId, IFormFile formFile)
+        public async Task<bool> UparArquivoReactFotoPerfil([FromForm] string formPasta, [FromForm] string formId, IFormFile formFile)
         {
-            if (formFile.Length > 0)
-            {
-                string webRootPath = Directory.GetCurrentDirectory() + "/Upload/" + formPasta + "/";
-                string nomeNovo = formPasta + "-" + formId + System.IO.Path.GetExtension(formFile.FileName); // Nome novo do arquivo completo;
-                string nomeSemExtensao = formPasta + "-" + formId; // Nome novo do arquivo sem extensão;
-                string caminhoDestino = webRootPath + nomeNovo; // Caminho de destino para upar;
-
-                // Verificar se já existe uma foto caso exista, delete-a;
-                DirectoryInfo root = new(webRootPath);
-                FileInfo[] listfiles = root.GetFiles(nomeSemExtensao + ".*");
-                if (listfiles.Length > 0)
-                {
-                    foreach (FileInfo file in listfiles)
-                    {
-                        System.IO.File.Delete(file.ToString());
-                    }
-                }
-
-                // Salvar imagem na pasta Upload na API;
-                using (var fs = new FileStream(caminhoDestino, FileMode.Create))
-                {
-                    await formFile.CopyToAsync(fs);
-                }
-
-                return true;
-            }
-
-            return false;
+            var isOk = await UparArquivoReact(formPasta, formId, formFile);
+            return isOk;
         }
 
         [HttpPost("atualizarFotoPerfil")]
