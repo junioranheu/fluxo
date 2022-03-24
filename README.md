@@ -1,4 +1,4 @@
-# Fluxo
+# Projeto Fluxo: Estudo .NET
 
 Projeto desenvolvido para estudar e praticar o novo .NET 6 e criação de API REST, validação JWT, etc.<br />
 
